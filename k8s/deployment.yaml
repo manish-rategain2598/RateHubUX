@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ratehub-frontend
-  namespace: production
+  namespace: staging
   labels:
     app: ratehub-frontend
-    environment: production
+    environment: staging
 spec:
   replicas: 2
   strategy:
@@ -20,7 +20,7 @@ spec:
     metadata:
       labels:
         app: ratehub-frontend
-        environment: production
+        environment: staging
     spec:
       containers:
       - name: ratehub-frontend
@@ -54,7 +54,7 @@ spec:
           failureThreshold: 3
         env:
         - name: NODE_ENV
-          value: "production"
+          value: "staging"
       imagePullSecrets:
       - name: docker-registry-secret  # Create this secret in your cluster
 

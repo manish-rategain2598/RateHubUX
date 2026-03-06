@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG = "${BUILD_NUMBER}"
         DOCKER_CREDENTIALS_ID = 'docker-registry-credentials' // Jenkins credential ID
         KUBECONFIG_CREDENTIALS_ID = 'kubeconfig-credentials' // Jenkins credential ID
-        NAMESPACE = 'production' // Kubernetes namespace
+        NAMESPACE = 'staging' // Kubernetes namespace
     }
     
     stages {
