@@ -8,7 +8,7 @@ import Schedule from './pages/Schedule'
 import DataSync from './pages/DataSync'
 //
 function App() {
-  return (
+  return (//
     <div className="app-layout">
       <Layout>
         <Routes>
