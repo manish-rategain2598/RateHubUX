@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  ratehub-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ratehub-frontend:latest
+    container_name: ratehub-frontend
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - ratehub-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  ratehub-network:
+    driver: bridge
+
