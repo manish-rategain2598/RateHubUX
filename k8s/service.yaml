@@ -1,18 +1,14 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: ratehub-frontend-service
-  namespace: staging
-  labels:
-    app: ratehub-frontend
+  name: ratehubux
+  namespace: ratehubux
 spec:
-  type: ClusterIP
   selector:
-    app: ratehub-frontend
+    app: ratehubux
   ports:
-  - name: http
-    port: 80
-    targetPort: 80
-    protocol: TCP
-  sessionAffinity: None
-
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: ClusterIP
