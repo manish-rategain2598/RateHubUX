@@ -1,27 +1,22 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ratehub-frontend-ingress
-  namespace: staging
   annotations:
-    kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"  # If using cert-manager for SSL
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    tailscale.com/tags: tag:staging,tag:k8s
+  name: ratehubux
+  namespace: ratehubux
 spec:
-  tls:
-  - hosts:
-    - staging-ratehub.yourdomain.com  # Update with your staging domain
-    secretName: ratehub-staging-tls-secret
+  ingressClassName: tailscale
   rules:
-  - host: staging-ratehub.yourdomain.com  # Update with your staging domain
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: ratehub-frontend-service
-            port:
-              number: 80
-
+    - http:
+        paths:
+          - backend:
+              service:
+                name: ratehubux
+                port:
+                  number: 80
+            path: /
+            pathType: Exact
+  tls:
+    - hosts:
+        - ratehubux
